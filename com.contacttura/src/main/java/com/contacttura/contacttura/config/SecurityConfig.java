@@ -1,5 +1,6 @@
 package com.contacttura.contacttura.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,10 +25,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.csrf().disable();
 	}
 	
+	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
 		//Usuario
-			.withUser("Lucas").password("root").roles("USER")
+			.withUser("Lucas").password("{noop}root").roles("USER")
 		//ADM
 			.and()
 			.withUser("ADMIN").password("{noop} root").roles("USER" , "ADMIN" );
