@@ -19,7 +19,7 @@ import com.contacttura.contacttura.model.User;
 import com.contacttura.contacttura.repository.ContactturaRepositoryUser;
 
 @RestController
-@RequestMapping ({"/user"} )
+@RequestMapping ({"/api/user"} )
 public class ContactturaControllerUser {
 	
 	@Autowired
