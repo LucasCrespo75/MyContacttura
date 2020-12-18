@@ -29,14 +29,14 @@ public class ContactturaControllerUser {
 // 		List All
 		@GetMapping
 // 		http://localhost:8090/user
-		public List findAll() {
+		public List <User> findAll() {
 			return repository.findAll();
 		}
 		
 //		Find by id - Buscaa valor pelo ID especifico
 		@GetMapping(value = "{id}")
 //		http://localhost:8090/user/1			
-		public ResponseEntity findById(@PathVariable long id) {
+		public ResponseEntity <User> findById(@PathVariable long id) {
 			return repository.findById(id)
 					.map(user -> ResponseEntity.ok().body(user))
 					.orElse(ResponseEntity.notFound().build());
@@ -53,7 +53,7 @@ public class ContactturaControllerUser {
 //		Update
 		@PutMapping(value = "{id}")
 //		http://localhost:8090/user/2	
-		public ResponseEntity update(@PathVariable long id,  
+		public ResponseEntity <User> update(@PathVariable long id,  
 				@RequestBody User user) {
 			return repository.findById(id)
 					.map(recordUser -> {

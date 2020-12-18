@@ -17,10 +17,15 @@ import com.contacttura.contacttura.model.Contacttura;
 import com.contacttura.contacttura.repository.ContactturaRepository;
 
 @RestController
-@RequestMapping ({"/contacttura"} )
+@RequestMapping ({"/api/contacttura"} )
 public class ContactturaController {
-	@Autowired
+
 	private ContactturaRepository repository;
+	
+	@Autowired
+	public ContactturaController (ContactturaRepository repository) {
+		this.repository = repository;
+	}
 	
 	
 // 		List All
@@ -33,7 +38,7 @@ public class ContactturaController {
 //		Find by id - Buscaa valor pelo ID especifico
 		@GetMapping(value = "{id}")
 //		http://localhost:8090/contacttura/1			
-		public ResponseEntity findById(@PathVariable long id) {
+		public ResponseEntity <Contacttura> findById(@PathVariable long id) {
 			return repository.findById(id)
 					.map(record -> ResponseEntity.ok().body(record))
 					.orElse(ResponseEntity.notFound().build());
@@ -49,7 +54,7 @@ public class ContactturaController {
 //		Update
 		@PutMapping(value = "{id}")
 //		http://localhost:8090/contacttura/2	
-		public ResponseEntity update(@PathVariable long id,  
+		public ResponseEntity <Contacttura> update(@PathVariable long id,  
 				@RequestBody Contacttura contacttura) {
 			return repository.findById(id)
 					.map(record -> {
