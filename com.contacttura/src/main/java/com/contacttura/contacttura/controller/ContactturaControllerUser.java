@@ -79,6 +79,23 @@ public class ContactturaControllerUser {
 					}).orElse(ResponseEntity.notFound().build());
 		}
 		
+		@SuppressWarnings("unlikely-arg-type")
+		@GetMapping(value="/Login")
+		public User login (@RequestBody User user) {
+			
+			User usuario = repository.findByUsername(user.getUsername());
+			
+			if(user.getPassword().equals(user)) {
+				System.out.print("OK");
+				
+			}else {
+				System.out.println("ERRO!!");
+			}
+			
+			return usuario;
+		}
+			
+		
 		 
 		private String criptoGrafia(String password) {
 			

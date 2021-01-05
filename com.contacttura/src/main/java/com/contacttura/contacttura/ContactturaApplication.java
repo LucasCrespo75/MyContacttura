@@ -19,39 +19,39 @@ public class ContactturaApplication {
 		
 	}
 	
-	//@Bean
-	//CommandLineRunner init(ContactturaRepository repository) {
-		//return args ->{
-		//repository.deleteAll();
-	//	LongStream.range(1,10).mapToObj(i->{
+	@Bean
+	CommandLineRunner init(ContactturaRepository repository) {
+		return args ->{
+		repository.deleteAll();
+		  LongStream.range(1,10).mapToObj(i->{
 			
-		//	Contacttura c = new Contacttura();
-		//	c.setName("Contacttura user" +i);
-		//	c.setEmail("contactura" +i+ "@gmail.com");
-		//	c.setPhone("(081) 9" +i + i + i + i + "-" + i + i + i + i);
-		//	return c;
+			Contacttura c = new Contacttura();
+			c.setName("Contacttura user" +i);
+			c.setEmail("contactura" +i+ "@gmail.com");
+			c.setPhone("(081) 9" +i + i + i + i + "-" + i + i + i + i);
+			return c;
 	
-		//})
+		})
 		
-		//.map(m -> repository.save(m))
-		//.forEach(System.out::println);
-	//	};
+		.map(m -> repository.save(m))
+		.forEach(System.out::println);
+	};
 		
-	//}
+	}
 	
-	public CommandLineRunner init(@Autowired ContactturaRepository contactturaRepository) {
-			return args ->{
+	//public CommandLineRunner init(@Autowired ContactturaRepository contactturaRepository) {
+		//	return args ->{
 			
-			Contacttura c = Contacttura.builder()
-				.phone("12345")
-				.email("lucas@gmail.com")
-				.name("Lucas Crespo")
-				.build();
+			//Contacttura c = Contacttura.builder()
+			//	.phone("12345")
+				//.email("lucas@gmail.com")
+				//.name("Lucas Crespo")
+				//.build();
 				
-			contactturaRepository.save(c);
+			//contactturaRepository.save(c);
 		
-			};
-			}
+			//};
+			//}
 	
 
 }
