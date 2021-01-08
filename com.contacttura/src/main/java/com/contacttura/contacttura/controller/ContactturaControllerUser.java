@@ -3,6 +3,7 @@ package com.contacttura.contacttura.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -79,20 +80,44 @@ public class ContactturaControllerUser {
 					}).orElse(ResponseEntity.notFound().build());
 		}
 		
-		@SuppressWarnings("unlikely-arg-type")
-		@GetMapping(value="/Login")
-		public User login (@RequestBody User user) {
+		@SuppressWarnings({"unlikely-arg-type"})
+		@PostMapping
+		public ResponseEntity<User> salvar (@RequestBody User user){
 			
-			User usuario = repository.findByUsername(user.getUsername());
+			String username = user.getUsername();
 			
-			if(user.getPassword().equals(user)) {
-				System.out.print("OK");
-				
+			boolean verificar = repository.existsByUsername(username);
+			
+			if(!verificar) {
+				repository.save(user);
 			}else {
-				System.out.println("ERRO!!");
+				return new ResponseEntity("Login ja existent", HttpStatus.BAD_REQUEST);
+				
 			}
 			
-			return usuario;
+			return new ResponseEntity<User>(user, HttpStatus.OK);
+		}
+		
+		
+		
+		
+		
+		@SuppressWarnings("unlikely-arg-type")
+		@GetMapping(value="/Login")
+		public ResponseEntity<User> login (@RequestBody User user) {
+			
+			String username = user.getUsername();
+			String password = user.getPassword();
+			
+			boolean verificar = repository.existsByUsernameAndPassword(username, password);
+			
+			if(verificar) {
+				
+				return new ResponseEntity("Usuario logado", HttpStatus.OK);
+				
+			}else {
+				return new ResponseEntity("Login ou senha incorreto", HttpStatus.BAD_REQUEST);
+			}
 		}
 			
 		
