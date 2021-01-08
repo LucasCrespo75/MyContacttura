@@ -44,12 +44,12 @@ public class ContactturaControllerUser {
 		}
 		
 //		Create
-		@PostMapping
+	//	@PostMapping
 //		http://localhost:8090/user	
-		public User create(@RequestBody User user) {
-			user.setPassword(criptoGrafia(user.getPassword()));
-			return repository.save(user);
-		}
+	//	public User create(@RequestBody User user) {
+		//	user.setPassword(criptoGrafia(user.getPassword()));
+			//return repository.save(user);
+		//}
 		
 //		Update
 		@PutMapping(value = "{id}")
