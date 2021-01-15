@@ -92,7 +92,7 @@ public class ContactturaControllerUser {
 			if(!verificar && admin) {
 				return new ResponseEntity("Administrador salvo", HttpStatus.OK);
 				
-			}else if(!verificar && admin){
+			}else if(!verificar && !admin){
 				return new ResponseEntity("Usuario salvo", HttpStatus.OK);
 				
 				
