@@ -43,13 +43,13 @@ public class ContactturaControllerUser {
 					.orElse(ResponseEntity.notFound().build());
 		}
 		
-//		Create
-	//	@PostMapping
-//		http://localhost:8090/user	
+		//Create
+		@PostMapping
+		//http://localhost:8090/user	
 	//	public User create(@RequestBody User user) {
 		//	user.setPassword(criptoGrafia(user.getPassword()));
 			//return repository.save(user);
-		//}
+	//	}
 		
 //		Update
 		@PutMapping(value = "{id}")
@@ -85,12 +85,18 @@ public class ContactturaControllerUser {
 		public ResponseEntity<User> salvar (@RequestBody User user){
 			
 			String username = user.getUsername();
+			boolean admin = user.isAdmin();
 			
 			boolean verificar = repository.existsByUsername(username);
 			
-			if(!verificar) {
-				repository.save(user);
-			}else {
+			if(!verificar && admin) {
+				return new ResponseEntity("Administrador salvo", HttpStatus.OK);
+				
+			}else if(!verificar && admin){
+				return new ResponseEntity("Usuario salvo", HttpStatus.OK);
+				
+				
+			}else if(!verificar) {
 				return new ResponseEntity("Login ja existent", HttpStatus.BAD_REQUEST);
 				
 			}
