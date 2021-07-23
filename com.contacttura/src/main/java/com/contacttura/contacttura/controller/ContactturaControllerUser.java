@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.contacttura.contacttura.model.User;
 import com.contacttura.contacttura.repository.ContactturaRepositoryUser;
-@CrossOrigin()
+//@CrossOrigin()
 @RestController
-@RequestMapping ({"/api/user"} )
+@RequestMapping ({"/user"} )
 public class ContactturaControllerUser {
 	
 	@Autowired

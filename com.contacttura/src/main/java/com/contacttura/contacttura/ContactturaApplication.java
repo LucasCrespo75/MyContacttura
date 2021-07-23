@@ -24,16 +24,35 @@ public class ContactturaApplication {
 	//public CommandLineRunner init(@Autowired ContactturaRepository contactturaRepository) {
 		//	return args ->{
 			
-		//	Contacttura c = Contacttura.builder()
-			//	.phone("12345")
-				//.email("lucas@gmail.com")
+			//Contacttura c = Contacttura.builder()
+				//.phone("12345")
+				////.email("lucas@gmail.com")
 				//.name("Lucas Crespo")
-				//.build();
+				///.build();
 				
 			//contactturaRepository.save(c);
 		
 			//};
-			//}
-	
+		//}
+					
+					@Bean
+					CommandLineRunner init(ContactturaRepository repository){
+						return args -> {
+//							opcional
+							repository.deleteAll();
+							LongStream.range(1, 10)
+							.mapToObj( i -> {
+								Contacttura c = new Contacttura();
+								c.setName("Contactura User " + i);
+								c.setEmail("contactura" + i + "@gmail.com");
+								c.setPhone("(081) 9" + i + i + i + i + "-" + i + i + i + i);
+								return c;
+							})
+							.map(m -> repository.save(m))
+							.forEach(System.out::println);
+						};
+					}
+					
+				}
 
-}
+

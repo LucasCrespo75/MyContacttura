@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.contacttura.contacttura.model.Contacttura;
 import com.contacttura.contacttura.repository.ContactturaRepository;
-@CrossOrigin()
+//@CrossOrigin()
 @RestController
-@RequestMapping ({"/api/contacttura"} )
+@RequestMapping ({"/contacttura"} )
 public class ContactturaController {
 
 	private ContactturaRepository repository;
